@@ -106,6 +106,7 @@ function triggerPixel(url, done) {
     img.addEventListener('error', done);
   }
 
+  console.log("insert trigger pixel: ".concat(url));
   img.src = url;
 }
 
@@ -677,10 +678,12 @@ function newRenderingManager(win, environment) {
     var search = 'Prebid_';
 
     if (uuid.substr(0, search.length) === search) {
+      console.log('call search is success');
       loadFromLocalCache(uuid); //register creative right away to not miss initial geom-update
 
       updateIframe(size);
     } else {
+      console.log('call to send request');
       var adUrl = "".concat(getCacheEndpoint(cacheHost, cachePath), "?uuid=").concat(uuid); //register creative right away to not miss initial geom-update
 
       updateIframe(size);
