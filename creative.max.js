@@ -770,6 +770,8 @@ function newRenderingManager(win, environment) {
           domHelper.insertElement(commentElm, document, 'body');
           utils.writeAdUrl(nurl, width, height);
         }
+      } else {
+        console.log('looks like this ad broken');
       }
     };
   }
