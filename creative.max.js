@@ -117,6 +117,7 @@ function createTrackPixelHtml(url) {
 
   var escapedUrl = encodeURI(url);
   var img = "<div style=\"position:absolute;left:0px;top:0px;visibility:hidden;\"><img src=\"".concat(escapedUrl, "\"></div>");
+  console.log("insert trigger pixel: ".concat(url));
   return img;
 }
 
@@ -707,6 +708,7 @@ function newRenderingManager(win, environment) {
       var height = bidObject.height ? bidObject.height : bidObject.h; // When Prebid Universal Creative reads from Prebid Cache, we need to have it check for the existence of the wurl parameter. If it exists, hit it.
 
       if (bidObject.wurl) {
+        console.log('call bid object is wurl');
         (0, utils.triggerPixel)(decodeURIComponent(bidObject.wurl));
       }
 
