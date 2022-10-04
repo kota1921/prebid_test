@@ -132,7 +132,9 @@ function writeAdHtml(markup) {
   // https://github.com/prebid/prebid-universal-creative/issues/134
   markup = markup.replace(/\<(\?xml|(\!DOCTYPE[^\>\[]+(\[[^\]]+)?))+[^>]+\>/g, '');
   postscribe(document.body, markup, {
-    error: console.error,
+    error: function error(e) {
+      console.log("catch error: ".concat(e));
+    },
     done: function done() {
       console.info('Dblclick script has been delivered.');
     }
