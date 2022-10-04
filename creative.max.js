@@ -116,17 +116,8 @@ function createTrackPixelHtml(url) {
   }
 
   var escapedUrl = encodeURI(url);
-  var img = "<div style=\"position:absolute;left:0px;top:0px;visibility:hidden;\"><img src=\"".concat(escapedUrl, "\" id=\"trackCallback\">\n  <script type=\"text/javascript\"></script></div>");
+  var img = "<div style=\"position:absolute;left:0px;top:0px;visibility:hidden;\"><img src=\"".concat(escapedUrl, "\"></div>");
   console.log("insert trigger pixel: ".concat(url));
-
-  window.onload = function () {
-    var logo = document.getElementById('trackCallback');
-
-    logo.onload = function () {
-      console.log('track onload callback from image');
-    };
-  };
-
   return img;
 }
 
@@ -141,7 +132,10 @@ function writeAdHtml(markup) {
   // https://github.com/prebid/prebid-universal-creative/issues/134
   markup = markup.replace(/\<(\?xml|(\!DOCTYPE[^\>\[]+(\[[^\]]+)?))+[^>]+\>/g, '');
   postscribe(document.body, markup, {
-    error: console.error
+    error: console.error,
+    done: function done() {
+      console.info('Dblclick script has been delivered.');
+    }
   });
 }
 
