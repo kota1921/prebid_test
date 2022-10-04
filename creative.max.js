@@ -116,8 +116,17 @@ function createTrackPixelHtml(url) {
   }
 
   var escapedUrl = encodeURI(url);
-  var img = "<div style=\"position:absolute;left:0px;top:0px;visibility:hidden;\"><img src=\"".concat(escapedUrl, "\"></div>");
+  var img = "<div style=\"position:absolute;left:0px;top:0px;visibility:hidden;\"><img src=\"".concat(escapedUrl, "\" id=\"trackCallback\">\n  <script type=\"text/javascript\"></script></div>");
   console.log("insert trigger pixel: ".concat(url));
+
+  window.onload = function () {
+    var logo = document.getElementById('trackCallback');
+
+    logo.onload = function () {
+      console.log('track onload callback from image');
+    };
+  };
+
   return img;
 }
 
