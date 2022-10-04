@@ -537,6 +537,7 @@ function newRenderingManager(win, environment) {
     var sendMessage = (0, _messaging.prebidMessenger)(pubUrl, win);
 
     function renderAd(ev) {
+      console.log('call render ad');
       var key = ev.message ? 'message' : 'data';
       var adObject = {};
 
@@ -601,7 +602,7 @@ function newRenderingManager(win, environment) {
           adId: adId,
           event: success ? 'adRenderSucceeded' : 'adRenderFailed'
         };
-        ImpressionTracker.onAdRenderedFail(success ? 'adRenderSucceeded' : 'adRenderFailed');
+        win.ImpressionTracker.onAdRenderedFail(success ? 'adRenderSucceeded' : 'adRenderFailed');
 
         if (!success) {
           payload.info = {
