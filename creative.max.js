@@ -485,6 +485,8 @@ function newRenderingManager(win, environment) {
    * @param  {dataObject} dataObject
    */
   var renderAd = function renderAd(doc, dataObject) {
+    console.log('call render ad');
+    ImpressionTracker.onAdRenderedSuccess();
     var targetingData = utils.transformAuctionTargetingData(dataObject);
 
     if (environment.isMobileApp(targetingData.env)) {
@@ -537,7 +539,6 @@ function newRenderingManager(win, environment) {
     var sendMessage = (0, _messaging.prebidMessenger)(pubUrl, win);
 
     function renderAd(ev) {
-      console.log('call render ad');
       var key = ev.message ? 'message' : 'data';
       var adObject = {};
 
