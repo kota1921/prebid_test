@@ -706,6 +706,7 @@ function newRenderingManager(win, environment) {
 
   function responseCallback(isMobileApp, hbPb) {
     return function (response) {
+      console.log("receive response ".concat(isMobileApp, " ").concat(hbPb));
       var bidObject = parseResponse(response);
       var auctionPrice = bidObject.price || hbPb;
       var ad = utils.getCreativeCommentMarkup(bidObject);
