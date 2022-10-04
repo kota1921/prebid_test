@@ -490,12 +490,16 @@ function newRenderingManager(win, environment) {
     var targetingData = utils.transformAuctionTargetingData(dataObject);
 
     if (environment.isMobileApp(targetingData.env)) {
+      console.log('call is mobile app');
       renderAmpOrMobileAd(targetingData.cacheHost, targetingData.cachePath, targetingData.uuid, targetingData.size, targetingData.hbPb, true);
     } else if (environment.isAmp(targetingData.uuid)) {
+      console.log('call is amp');
       renderAmpOrMobileAd(targetingData.cacheHost, targetingData.cachePath, targetingData.uuid, targetingData.size, targetingData.hbPb);
     } else if (!environment.canLocatePrebid()) {
+      console.log('call can locate prebid');
       renderCrossDomain(targetingData.adId, targetingData.adServerDomain, targetingData.pubUrl);
     } else {
+      console.log('call render legacy');
       renderLegacy(doc, targetingData.adId);
     }
   };
