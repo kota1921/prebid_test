@@ -718,6 +718,8 @@ function newRenderingManager(win, environment) {
       }
 
       if (bidObject.adm) {
+        console.log('call bid object is adm');
+
         if (auctionPrice) {
           // replace ${AUCTION_PRICE} macro with the bidObject.price or hb_pb.
           bidObject.adm = bidObject.adm.replace('${AUCTION_PRICE}', auctionPrice);
@@ -754,6 +756,7 @@ function newRenderingManager(win, environment) {
           }
         }
 
+        console.log("call write ad ".concat(ad));
         utils.writeAdHtml(ad);
       } else if (bidObject.nurl) {
         if (isMobileApp) {
