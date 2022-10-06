@@ -720,7 +720,7 @@ function newRenderingManager(win, environment) {
         width = bidObject.width ? bidObject.width : bidObject.w;
         height = bidObject.height ? bidObject.height : bidObject.h;
       } catch (error) {
-        ImpressionTracker.onAdRenderedFail(error);
+        ImpressionTracker.onAdRenderedFail(error.message);
       } // When Prebid Universal Creative reads from Prebid Cache, we need to have it check for the existence of the wurl parameter. If it exists, hit it.
 
 
