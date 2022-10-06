@@ -707,11 +707,22 @@ function newRenderingManager(win, environment) {
   function responseCallback(isMobileApp, hbPb) {
     return function (response) {
       console.log("receive response ".concat(isMobileApp, " ").concat(hbPb));
-      var bidObject = parseResponse(response);
-      var auctionPrice = bidObject.price || hbPb;
-      var ad = utils.getCreativeCommentMarkup(bidObject);
-      var width = bidObject.width ? bidObject.width : bidObject.w;
-      var height = bidObject.height ? bidObject.height : bidObject.h; // When Prebid Universal Creative reads from Prebid Cache, we need to have it check for the existence of the wurl parameter. If it exists, hit it.
+      var bidObject;
+      var auctionPrice;
+      var ad;
+      var width;
+      var height;
+
+      try {
+        bidObject = parseResponse(response);
+        auctionPrice = bidObject.price || hbPb;
+        ad = utils.getCreativeCommentMarkup(bidObject);
+        width = bidObject.width ? bidObject.width : bidObject.w;
+        height = bidObject.height ? bidObject.height : bidObject.h;
+      } catch (error) {
+        ImpressionTracker.onAdRenderedFail(error);
+      } // When Prebid Universal Creative reads from Prebid Cache, we need to have it check for the existence of the wurl parameter. If it exists, hit it.
+
 
       if (bidObject.wurl) {
         console.log('call bid object is wurl');
