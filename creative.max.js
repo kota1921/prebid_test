@@ -493,7 +493,6 @@ function newRenderingManager(win, environment) {
    */
   var renderAd = function renderAd(doc, dataObject) {
     console.log('call render ad');
-    ImpressionTracker.onAdRenderedSuccess();
     var targetingData = utils.transformAuctionTargetingData(dataObject);
 
     if (environment.isMobileApp(targetingData.env)) {
@@ -614,7 +613,6 @@ function newRenderingManager(win, environment) {
           adId: adId,
           event: success ? 'adRenderSucceeded' : 'adRenderFailed'
         };
-        win.ImpressionTracker.onAdRenderedFail(success ? 'adRenderSucceeded' : 'adRenderFailed');
 
         if (!success) {
           payload.info = {
