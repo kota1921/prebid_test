@@ -125,6 +125,7 @@ function writeAdUrl(adUrl, width, height) {
   var iframe = domHelper.getEmptyIframe(height, width);
   iframe.src = adUrl;
   document.body.appendChild(iframe);
+  ImpressionTracker.onAdRenderedSuccess();
 }
 
 function writeAdHtml(markup) {
@@ -133,10 +134,10 @@ function writeAdHtml(markup) {
   markup = markup.replace(/\<(\?xml|(\!DOCTYPE[^\>\[]+(\[[^\]]+)?))+[^>]+\>/g, '');
   postscribe(document.body, markup, {
     error: function error(e) {
-      console.log("catch error: ".concat(e));
+      ImpressionTracker.onAdRenderedFail("catch error: ".concat(e));
     },
     done: function done() {
-      console.info('Dblclick script has been delivered.');
+      ImpressionTracker.onAdRenderedSuccess();
     }
   });
 }
@@ -769,6 +770,7 @@ function newRenderingManager(win, environment) {
           utils.writeAdUrl(nurl, width, height);
         }
       } else {
+        ImpressionTracker.onAdRenderedFail();
         console.log('looks like this ad broken');
       }
     };
